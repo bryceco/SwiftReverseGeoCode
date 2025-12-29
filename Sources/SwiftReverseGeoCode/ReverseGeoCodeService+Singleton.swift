@@ -14,7 +14,7 @@ public extension ReverseGeoCodeService {
     /// get Singleton instance
     static var main: ReverseGeoCodeService {
         guard let unwrapservice = service else {
-            service = ReverseGeoCodeService(database: databasePath)
+            service = try? ReverseGeoCodeService(database: databasePath)
             return service!
         }
         return unwrapservice
