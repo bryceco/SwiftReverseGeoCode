@@ -60,7 +60,7 @@ public final class ReverseGeoCodeService {
 				name: name,
 				adminName: adminame ?? "",
 				countryCode: countrycode,
-				countryName: countryname,
+				countryName: countryname.trimmingCharacters(in: .whitespacesAndNewlines),
 				latitude: lat,
 				longitude: long
 			)
