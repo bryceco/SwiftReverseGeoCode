@@ -46,7 +46,7 @@ public final class ReverseGeoCodeService {
 			guard
 				let id = row[0] as? Int64,
 				let name = row[1] as? String,
-				let adminame = row[3] as? String,
+				let adminame = row[3] as? String?, // can be nil, e.g. Aruba
 				let countrycode = row[4] as? String,
 				let countryname = row[5] as? String,
 				let lat = row[6] as? Double,
@@ -58,7 +58,7 @@ public final class ReverseGeoCodeService {
 			return LocationDescription(
 				id: id,
 				name: name,
-				adminName: adminame,
+				adminName: adminame ?? "",
 				countryCode: countrycode,
 				countryName: countryname,
 				latitude: lat,
