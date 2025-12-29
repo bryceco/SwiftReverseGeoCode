@@ -1,13 +1,8 @@
 import Foundation
 import SQLite
-import OSLog
 
 public final class ReverseGeoCodeService {
 	private let dbConnection: Connection
-	private let logger = Logger(
-		subsystem: Bundle.main.bundleIdentifier ?? "SwiftReverseGeoCode",
-		category: "ReverseGeoCodeService"
-	)
 
 	/// Precompiled statement
 	private let reverseStmt: Statement
@@ -31,14 +26,12 @@ public final class ReverseGeoCodeService {
 		do {
 			self.dbConnection = try Connection(database, readonly: true)
 		} catch {
-			logger.error("Error connecting to database: \(String(describing: error))")
 			throw error
 		}
 
 		do {
 			self.reverseStmt = try dbConnection.prepare(Self.reverseSQL)
 		} catch {
-			logger.error("Error preparing reverse geocode SQL: \(String(describing: error))")
 			throw error
 		}
 	}
@@ -59,7 +52,6 @@ public final class ReverseGeoCodeService {
 				let lat = row[6] as? Double,
 				let long = row[7] as? Double
 			else {
-				logger.error("Error unwrapping location for \(latitude), \(longitude)")
 				throw ReverseError.errorUnwraping
 			}
 
@@ -74,7 +66,6 @@ public final class ReverseGeoCodeService {
 			)
 		}
 
-		logger.warning("Nothing found for \(latitude), \(longitude)")
 		throw ReverseError.novalue
 	}
 }
