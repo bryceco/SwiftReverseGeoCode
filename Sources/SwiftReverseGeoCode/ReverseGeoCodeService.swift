@@ -6,8 +6,6 @@ public final class ReverseGeoCodeService {
 
 	/// Precompiled statement
 	private let reverseStmt: Statement
-
-	/// SQL is static so it never gets re-parsed
 	private static let reverseSQL = """
 		SELECT * FROM everything WHERE id IN (
 			SELECT feature_id
@@ -50,7 +48,7 @@ public final class ReverseGeoCodeService {
 				let countrycode = row[4] as? String,
 				let countryname = row[5] as? String,
 				let lat = row[6] as? Double,
-				let long = row[7] as? Double
+				let lon = row[7] as? Double
 			else {
 				throw ReverseError.errorUnwraping
 			}
@@ -62,7 +60,7 @@ public final class ReverseGeoCodeService {
 				countryCode: countrycode,
 				countryName: countryname.trimmingCharacters(in: .whitespacesAndNewlines),
 				latitude: lat,
-				longitude: long
+				longitude: lon
 			)
 		}
 
