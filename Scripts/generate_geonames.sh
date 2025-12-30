@@ -9,7 +9,7 @@ OUTPUT="geocitydb.sqlite"
 
 if [ ! -f "$DATA" ]; then
   echo "Downloading cities from Geonames..."
-  wget "http://download.geonames.org/export/dump/cities500.zip"
+  curl -O "http://download.geonames.org/export/dump/cities500.zip"
   unzip "cities500.zip"
 
   #wget "http://download.geonames.org/export/dump/cities1000.zip"
@@ -23,14 +23,14 @@ fi
 
 if [ ! -f "$ADMIN1" ]; then
   echo "Downloading admin1 from Geonames..."
-  wget "http://download.geonames.org/export/dump/admin1CodesASCII.txt"
+  curl -O "http://download.geonames.org/export/dump/admin1CodesASCII.txt"
 else
   echo "Using existing $ADMIN1"
 fi
 
 if [ ! -f "$COUNTRIES" ]; then
   echo "Downloading countries from Geonames..."
-  wget "http://download.geonames.org/export/dump/countryInfo.txt"
+  curl -O "http://download.geonames.org/export/dump/countryInfo.txt"
 else
   echo "Using existing $COUNTRIES"
 fi
